@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!--scripts-->
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script type="text/javascript" src="client.js"></script>
+    <script type="text/javascript" src="socket.js"></script>
+
+    <!--bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+</head>
+<body ng-controller="chatController as main">
+<div class="container">
+    <h1>WebChat 1.0</h1>
+    <p>{{main.tester}}</p>
+    <div class="col-md-8">
+        <h3>Chat</h3>
+        <form ng-submit="main.sendMessage()">
+            <input type="text" placeholder="Write message" ng-model="main.message"/>
+            <button class="btn btn-default" type="submit">Send</button>
+        </form>
+
+        <ul class="list-unStyled" ng-repeat="message in main.messageList">
+            Message from: {{message.username}} time: {{message.time}}
+            <li>{{message.msg}}</li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <form ng-submit="main.submitUsername()">
+            <input type="text" placeholder="Write username" ng-model="main.newUsername"/>
+            <button class="btn btn-default" type="submit">Submit</button>
+        </form>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>users online</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in main.userList">
+                <td>{{user}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
